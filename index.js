@@ -52,6 +52,43 @@ app.get('/products',async (req,res)=>{
     }
 })
 
+// DELETE API
+
+app.delete('/product/:id',async(req,res)=>{
+    let result=await Product.deleteOne({_id:req.params.id})
+    res.send(result)
+})
+
+// GET SPECIFIC PRODUCT API
+
+app.get('/product/:id',async(req,res)=>{
+    let result=await Product.findOne({_id:req.params.id})
+    if(result){
+        res.send(result)
+    }else{
+        res.send({
+            message:'Product not found',
+            data:null
+        })
+    }
+ 
+})
+
+// UPDATE SPECIFIC PRODUCT API
+
+app.put('/update/:id',async(req,res)=>{
+    let result=await Product.updateOne({_id:req.params.id},{$set:req.body})
+    if(result){
+        res.send(result)
+    }else{
+        res.send({
+            message:'Product not found',
+            data:null
+        })
+    }
+ 
+})
+
 
 
 
