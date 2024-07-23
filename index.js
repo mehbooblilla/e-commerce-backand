@@ -90,6 +90,19 @@ app.put('/update/:id',async(req,res)=>{
 })
 
 
+//SEARCH API
+
+app.get('/search/:key',async(req,res)=>{
+    let result=await Product.find({
+        '$or':[
+            {name:{$regex:req.params.key}},
+            {brand:{$regex:req.params.key}}
+        ]
+    })
+    res.send(result)
+})
+
+
 
 
 
